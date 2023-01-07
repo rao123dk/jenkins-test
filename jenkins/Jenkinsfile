@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+    tools {nodejs "19.4.0"}
+    stages {
+        stage("clean up"){
+            steps {
+                deleteDir()
+            }
+        }
+        stage("clone repo") {
+            steps {
+                sh "git clone https://github.com/rao123dk/jenkins-test.git"
+            }
+        }
+        stage("version") {
+            steps {
+                sh "npm version"
+            }
+        }
+        stage("Install") {
+            steps {
+                dir("jenkins-test") {
+                    sh "npm install"
+                }
+            }
+        }
+
+        stage("build") {
+            steps {
+                dir("jenkins-test") {
+                    sh "npm run build"
+                }
+            }
+        }
+
+        stage("Test") {
+            steps {
+                dir("jenkins-test") {
+                    sh "npm run test"
+                }
+            }
+        }
+    }
+}
