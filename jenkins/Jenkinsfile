@@ -2,16 +2,16 @@ pipeline {
     agent any
     tools {nodejs "19.4.0"}
     stages {
-        stage("clean up"){
-            steps {
-                deleteDir()
-            }
-        }
-        stage("clone repo") {
-            steps {
-                sh "git clone https://github.com/rao123dk/jenkins-test.git"
-            }
-        }
+        // stage("clean up"){
+        //     steps {
+        //         deleteDir()
+        //     }
+        // }
+        // stage("clone repo") {
+        //     steps {
+        //         sh "git clone https://github.com/rao123dk/jenkins-test.git"
+        //     }
+        // }
         stage("version") {
             steps {
                 sh "npm version"
